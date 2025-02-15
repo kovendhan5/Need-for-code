@@ -12,6 +12,11 @@ const FileItem = styled.li`
   padding: 10px;
   border-bottom: 1px solid #ccc;
   display: flex;
+  flex-direction: column;
+`;
+
+const FileDetails = styled.div`
+  display: flex;
   justify-content: space-between;
   align-items: center;
 `;
@@ -38,6 +43,19 @@ const DownloadButton = styled.button`
   }
 `;
 
+const PreviewButton = styled.button`
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #2980b9;
+  }
+`;
+
 const DeleteButton = styled.button`
   background-color: #dc3545;
   color: #fff;
@@ -55,13 +73,18 @@ const FileList = ({ files }) => (
   <FileListContainer>
     {files.map(file => (
       <FileItem key={file.id}>
-        <FileName>{file.title}</FileName>
-        <FileActions>
-          <a href={file.url} target="_blank" rel="noopener noreferrer">
-            <DownloadButton>Download</DownloadButton>
-          </a>
-          <DeleteButton onClick={() => handleDelete(file.id)}>Delete</DeleteButton>
-        </FileActions>
+        <FileDetails>
+          <FileName>{file.title}</FileName>
+          <FileActions>
+            <a href={file.url} target="_blank" rel="noopener noreferrer">
+              <DownloadButton>Download</DownloadButton>
+            </a>
+            <PreviewButton onClick={() => window.open(file.url, '_blank')}>Preview</PreviewButton>
+            <DeleteButton onClick={() => handleDelete(file.id)}>Delete</DeleteButton>
+          </FileActions>
+        </FileDetails>
+        <p>{file.description}</p>
+        <p>Uploaded on: {file.date} at {file.time}</p>
       </FileItem>
     ))}
   </FileListContainer>

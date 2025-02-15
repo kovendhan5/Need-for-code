@@ -17,7 +17,14 @@ const Cards = styled.div`
 `;
 
 const Home = () => {
-  const semesters = [1, 2, 3, 4, 5, 6];
+  const semesters = [
+    { id: 1, name: 'Semester 1' },
+    { id: 2, name: 'Semester 2' },
+    { id: 3, name: 'Semester 3' },
+    { id: 4, name: 'Semester 4' },
+    { id: 5, name: 'Semester 5' },
+    { id: 6, name: 'Semester 6' }
+  ];
 
   return (
     <Container>
@@ -25,7 +32,7 @@ const Home = () => {
       <p>Your go-to platform for collaborative coding and study material exchange.</p>
       <Cards>
         {semesters.map(semester => (
-          <SemesterCard key={semester} semesterId={semester} />
+          <SemesterCard key={semester.id} semesterId={semester.id} name={semester.name} />
         ))}
       </Cards>
     </Container>

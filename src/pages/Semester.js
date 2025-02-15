@@ -38,7 +38,7 @@ const Semester = () => {
       <h1>Semester {semesterId}</h1>
       <SubjectCards>
         {subjects.map(subject => (
-          <SubjectCard key={subject.id} subject={subject} />
+          <SubjectCard key={subject.id} subjectId={subject.id} name={subject.name} />
         ))}
       </SubjectCards>
     </Container>

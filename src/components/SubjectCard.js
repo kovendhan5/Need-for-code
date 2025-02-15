@@ -9,7 +9,7 @@ const Card = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
-  width: calc(33.333% - 20px);
+  width: calc(25% - 20px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
   color: #333;
@@ -19,10 +19,10 @@ const Card = styled.div`
   }
 `;
 
-const SubjectCard = ({ subject }) => (
+const SubjectCard = ({ subjectId, name }) => (
   <Card>
-    <h3>{subject.name}</h3>
-    <Link to={`/subject/${subject.id}`}>View Subject</Link>
+    <h3>{name}</h3>
+    <Link to={`/subject/${subjectId}`}>View Subject</Link>
   </Card>
 );
 

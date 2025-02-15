@@ -19,7 +19,7 @@ const Card = styled.div`
   }
 `;
 
-const SemesterCard = ({ semesterId }) => (
+const SemesterCard = ({ semesterId, name }) => (
   <Card>
     <h3>Semester {semesterId}</h3>
     <Link to={`/semester/${semesterId}`}>Go to Semester {semesterId}</Link>

@@ -1,6 +1,6 @@
 // src/components/Header.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
@@ -39,34 +39,35 @@ const Nav = styled.nav`
   }
 `;
 
-const SearchBar = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SearchInput = styled.input`
-  padding: 8px 15px;
-  border: none;
-  border-radius: 20px;
-  width: 250px;
-  font-size: 16px;
-  margin-right: 10px;
-`;
-
-const SearchButton = styled.button`
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #c0392b;
+const AdminNav = styled.ul`
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin-left: 20px;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      color: #ecf0f1;
+    }
   }
 `;
 
-function Header() {
+const Header = () => {
+  const [role, setRole] = useState(localStorage.getItem('role') || '');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('authenticated');
+    localStorage.removeItem('role');
+    navigate('/login');
+  };
+
   return (
     <HeaderContainer>
       <Logo>Need For Code</Logo>
@@ -76,12 +77,16 @@ function Header() {
           <li><Link to="/login">Login</Link></li>
         </ul>
       </Nav>
-      <SearchBar>
-        <SearchInput type="text" placeholder="Search" />
-        <SearchButton>Search</SearchButton>
-      </SearchBar>
+      {role === 'admin' && (
+        <AdminNav>
+          <ul>
+            <li><Link to="/upload">Upload File</Link></li>
+            <li><button onClick={handleLogout}>Logout</button></li>
+          </ul>
+        </AdminNav>
+      )}
     </HeaderContainer>
   );
-}
+};
 
 export default Header;
